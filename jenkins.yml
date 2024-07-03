@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  jenkins:
+    image: bitnami/jenkins
+    container_name: jenkins-setup
+    ports:
+      - '8080:8080'
+      - '443:8443'
+    environment:
+      - JENKINS_USERNAME=$jenkins_username
+      - JENKINS_PASSWORD=$jenkins_password
+    env_file:
+      - ./.env
+    volumes:
+      - '$PWD/Jenkins_data:/bitnami/jenkins'
+      
+networks:
+  jenkins-network:
+    driver: bridge
+
+volumes:
+  jenkins_data:
+    driver: local
+
